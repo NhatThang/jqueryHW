@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- - cho 1 box ẩn, khi mà click vào 1 button, show box lên. 
+    set lại content cho box. và kiểm tra. nếu như box này có class 
+    là active-> thì khi mà dbclick vào thì sẽ xoá thằng box này luôn. 
+    - hiển thị ra thông báo là đã xoá. -->
+
+    <div id="box" style="width: 100px;height:100px;background-color: #333;display: none;" class="active"></div>
+    <button id="hide" style="display: none;">Hide</button>
+    <button id="show">Show</button>
+    <button id="dbclick" style="display: none;">Double Click to remove class</button>
+    <button id="reset">Reset</button>
+</body>
+<script>
+    $(function() {
+        $box = $('#box');
+
+        $("#show").on('click', function() {
+            $box.show(500);
+            $box.text('Day la box');
+            $box.css('color', 'white');
+            $('#hide').show();
+            $('#dbclick').show();
+        });
+
+        $('#hide').on('click', function() {
+            $box.hide(500);
+            $(this).hide();
+            $('#dbclick').hide();
+        });
+
+        $active = $box.attr('class');
+        $('#dbclick').dblclick(function() {
+            if ($active = 'active') {
+                $box.removeClass('active');
+            }
+            $rm = $box.remove();
+            if ($rm) {
+                alert('Deleted');
+            }
+        });
+
+        $('#reset').on('click', function() {
+            location.reload(true);
+        });
+    });
+</script>
+<style>
+    .active::before {
+        content: 'Active';
+        color: white;
+        background-color: rgb(187, 84, 84);
+    }
+</style>
+
+</html>
